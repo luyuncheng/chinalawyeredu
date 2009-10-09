@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * 
- * @author 华锋 2009-1-6  上午09:11:01
+ * @author 华锋 2009-1-6 上午09:11:01
  * 
  */
 public class TreeNode {
@@ -62,14 +62,13 @@ public class TreeNode {
 	 * @param parent
 	 *            键对象
 	 */
-//	public TreeNode(Map<Object, Object> parentChild, Object key) {
-//		this.parentChild = parentChild;
-//		this.key = key;
-//		this.keyset = parentChild.keySet().toArray();
-//		this.length = keyset.length;
-//
-//	}
-
+	// public TreeNode(Map<Object, Object> parentChild, Object key) {
+	// this.parentChild = parentChild;
+	// this.key = key;
+	// this.keyset = parentChild.keySet().toArray();
+	// this.length = keyset.length;
+	//
+	// }
 	/**
 	 * 
 	 * @param parentChild
@@ -88,82 +87,103 @@ public class TreeNode {
 	public List<Integer> getChildrenLevel() {
 		return this.childrenLevel;
 	}
-	
+
 	/**
 	 * 返回输入键的所有子对象
 	 * 
 	 * @return
 	 */
 	private List<Object> getChildrenList() {
-		//if (!_getchild) {
-			parentlevelMap.put(key, 0);
-			if (key == null)
-				throw new IllegalArgumentException("key can't be null");
-			getChildren(key);
-		//}
+		// if (!_getchild) {
+		parentlevelMap.put(key, 0);
+		if (key == null)
+			throw new IllegalArgumentException("key can't be null");
+		getChildren(key,false);
+		// }
+		_getchild = true;
+		return this.childrenList;
+	}
+	/**
+	 * 得到直接下属
+	 * @return
+	 */
+	private List<Object> getDirectChildrenList() {
+		// if (!_getchild) {
+		parentlevelMap.put(key, 0);
+		if (key == null)
+			throw new IllegalArgumentException("key can't be null");
+		getChildren(key,true);
+		// }
 		_getchild = true;
 		return this.childrenList;
 	}
 
 	public List<Object> getChildrenList(Object key) {
-		if(this.key!=null&&this.key.equals(key)&&_getchild){//如果前后2个的key是相同的
+		if (this.key != null && this.key.equals(key) && _getchild) {// 如果前后2个的key是相同的
 			return this.childrenList;
-		}else{
+		} else {
 			this.key = key;
 			this.childrenList.clear();
 			return getChildrenList();
 		}
-    }
-	
-//	/**
-//	 * 得到直接下属
-//	 * @param key
-//	 * @return
-//	 */
-//	public List<Object> getDirectChildrenLit(Object key){
-//		
-//	}
- 
+	}
+
+	 /**
+	 * 得到直接下属
+	 * @param key
+	 * @return
+	 */
+	 public List<Object> getDirectChildrenList(Object key){
+		
+			if (this.key != null && this.key.equals(key) && _getchild) {// 如果前后2个的key是相同的
+				return this.childrenList;
+			} else {
+				this.key = key;
+				this.childrenList.clear();
+				return getDirectChildrenList();
+			}
+	 }
+
 	/**
 	 * 返回输入键的所有父对象
 	 * 
 	 * @return
 	 */
 	private List<Object> getParentList() {
-	  // if (!_getparent) {
-			if (this.key == null)
-				throw new IllegalArgumentException("key can't be null");
-			getParent(this.key);
-	//	}
+		// if (!_getparent) {
+		if (this.key == null)
+			throw new IllegalArgumentException("key can't be null");
+		getParent(this.key);
+		// }
 		_getparent = true;
 		return this.parentList;
 	}
 
 	public List<Object> getParentList(Object key) {
-		if(this.key!=null&&this.key.equals(key)&&_getparent){//如果前后2个的key是相同的
+		if (this.key != null && this.key.equals(key) && _getparent) {// 如果前后2个的key是相同的
 			return this.parentList;
-		}else{
+		} else {
 			this.key = key;
 			this.parentList.clear();
 			return getParentList();
 		}
-		
-	
+
 	}
-	
+
 	/**
 	 * 根据parent找到下面所有的children
 	 * 
 	 * @param parent
 	 */
-	private void getChildren(Object parent) {
+	private void getChildren(Object parent,boolean isdirect) {
 		for (int i = 0; i < length; i++) {
 			Object obj = keyset[i];
 			if (parentChild.get(obj).equals(parent)) {
 				childrenList.add(obj);// 加入到返回对象中
 				childrenLevel.add(parentlevelMap.get(parent).intValue() + 1);
 				parentlevelMap.put(obj, parentlevelMap.get(parent).intValue() + 1);
-				getChildren(obj);
+				if(!isdirect)
+				 getChildren(obj,false);
 			}
 		}
 	}
@@ -192,47 +212,47 @@ public class TreeNode {
 
 	public static void main(String args[]) {
 		HashMap<Object, Object> parentChild = new HashMap<Object, Object>();
-		
-		long now=System.currentTimeMillis();
-		
-		for(int i=0;i<10000;i++){
-			parentChild.put(i,i+1);
+
+		long now = System.currentTimeMillis();
+
+		for (int i = 0; i < 10000; i++) {
+			parentChild.put(i, i + 1);
 		}
-		
-		System.out.println(System.currentTimeMillis()-now);
-		
-//		parentChild.put(2, -1);
-//		parentChild.put(0,-1);
-//		parentChild.put(3,1);
-//    	parentChild.put(4,1);
-//		parentChild.put(15,5);
-//		parentChild.put(5,4);
-//		parentChild.put(16,5);
-//		parentChild.put(17,5);
-//		parentChild.put(18,5);
-//		parentChild.put(19,5);
-//    	parentChild.put(20,5);
-//    	parentChild.put(21,5);
-//		parentChild.put(22,5);
-//		parentChild.put(23,5);
-//		parentChild.put(24,5);
-//		parentChild.put(6,5);
-//		parentChild.put(7,3);
-//		parentChild.put(8,3);
-//		parentChild.put(9,2);
-//		parentChild.put(10,0);
-//		parentChild.put(11,0);
-//		parentChild.put(13,5);
-//		parentChild.put(14,5);
-//		parentChild.put(25,5);
-//		parentChild.put(26,5);
-//		parentChild.put(1,-1);
+
+		System.out.println(System.currentTimeMillis() - now);
+
+		// parentChild.put(2, -1);
+		// parentChild.put(0,-1);
+		// parentChild.put(3,1);
+		// parentChild.put(4,1);
+		// parentChild.put(15,5);
+		// parentChild.put(5,4);
+		// parentChild.put(16,5);
+		// parentChild.put(17,5);
+		// parentChild.put(18,5);
+		// parentChild.put(19,5);
+		// parentChild.put(20,5);
+		// parentChild.put(21,5);
+		// parentChild.put(22,5);
+		// parentChild.put(23,5);
+		// parentChild.put(24,5);
+		// parentChild.put(6,5);
+		// parentChild.put(7,3);
+		// parentChild.put(8,3);
+		// parentChild.put(9,2);
+		// parentChild.put(10,0);
+		// parentChild.put(11,0);
+		// parentChild.put(13,5);
+		// parentChild.put(14,5);
+		// parentChild.put(25,5);
+		// parentChild.put(26,5);
+		// parentChild.put(1,-1);
 
 		TreeNode node = new TreeNode(parentChild);
-		 now = System.currentTimeMillis();
-		 System.out.println(node.getChildrenList(10));
-		 
-		 System.out.println(node.childrenLevel);
+		now = System.currentTimeMillis();
+		System.out.println(node.getChildrenList(10));
+
+		System.out.println(node.childrenLevel);
 
 		System.out.println(node.getParentList(9991));
 		System.out.println(System.currentTimeMillis() - now);

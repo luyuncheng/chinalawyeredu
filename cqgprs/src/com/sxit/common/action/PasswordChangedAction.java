@@ -77,7 +77,6 @@ public class PasswordChangedAction extends AbstractAction {
 		int result = service.changePass(user.getUserid(), oldpass, newpass);
 		if (result == 1) {
 			this.message = "您输入的旧密码不符合,请返回重新输入";
-
 			return "message";
 			// 重新返回到输入页面
 		}

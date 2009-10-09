@@ -58,10 +58,7 @@
            <result name="success" type="json"></result>
    	   </action>
      
-   	   <action name="checkCreateName" class="com.sxit.common.action.ajax.CheckCreateNameAction">
-   	   		<result name="success" type="json"></result>
-   	   </action>
-   	  
+   	
     </package>
 	
 	

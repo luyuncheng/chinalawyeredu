@@ -13,9 +13,6 @@
             <column name="GROUPID" precision="10" scale="0" />
         </many-to-one>
      
-     
-     
-        
              
         <property name="loginname" type="string">
             <column name="LOGINNAME" length="20" not-null="true">
@@ -42,24 +39,13 @@
                 <comment>在公司的工号</comment>
             </column>
         </property>
-      <!--    <property name="birthday" type="string">
-            <column name="BIRTHDAY" length="10">
-                <comment>生日</comment>
-            </column>
-        </property>
-        -->
+    
         <property name="password" type="string">
             <column name="PASSWORD" length="40" not-null="true">
                 <comment>md5后的密码</comment>
             </column>
         </property>
-
-        
-        <!-- <property name="passkey" type="string">
-            <column name="PASSKEY" length="10">
-                <comment>10位字节长度的确认码</comment>
-            </column>
-        </property> -->
+     
         <property name="status" type="byte">
             <column name="STATUS" precision="2" scale="0" not-null="true">
                 <comment>状态，0启用，其他禁用状态
@@ -103,14 +89,7 @@
             </column>
         </property>
     
-    <!-- 
-        <property name="roleid" type="string">
-            <column name="roleid" length="20">
-                <comment>角色,和sys_user_role中的关联一样</comment>
-            </column>
-        </property>
-         -->
-        
+       
         <set name="sysRights" inverse="false" table="SYS_USER_RIGHTS">
             <key>
                 <column name="USERID" precision="10" scale="0" not-null="true">

@@ -23,10 +23,6 @@ public class SysRole implements java.io.Serializable {
 	private Set<SysRight> sysRights = new HashSet<SysRight>(0);
 
 	private int gradeid; //角色的层级，作为角色a可以分配的角色的判断依据，越小的可分配的角色越多
-	
-	
-	
-
 	public int getGradeid() {
 		return gradeid;
 	}

@@ -30,10 +30,10 @@ public class UserLoginAction extends AbstractAction {
 
 	private static Log LOG = LogFactory.getLog(UserLoginAction.class);
 
-	private static final DateFormat df = new java.text.SimpleDateFormat("yyyyMMdd操");
+//	private static final DateFormat df = new java.text.SimpleDateFormat("yyyyMMdd操");
 	private String loginname;
 	private String password;
-	private String randnum;
+//	private String randnum;
 	
 	
 
@@ -50,25 +50,27 @@ public class UserLoginAction extends AbstractAction {
 	@Override
 	protected String go() throws Exception {
 		// String today=df.format(new java.util.Date());
-
+		SysLoginLogService loginService = (SysLoginLogService) getBean("sysLoginLogService");
 		ActionContext ctx = ActionContext.getContext();
-		String contextid = ctx.getApplication().get("CONTEXTID").toString();
+
 		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
+		String _remoteAddr = request.getRemoteAddr();
+		String contextid = ctx.getApplication().get("CONTEXTID").toString();
 		this.nextPage = "index.action";
 		Object obj = get(Constants.VALIDATE_CODE);
 //		LOG.debug("===================验证码:::" + obj);
 		// 验证码为空
-		if (!request.getRemoteAddr().equals("127.0.0.1")) {
-			if (obj == null) {
-				message = "验证码已经过期,请返回重新输入";
-				return "message";
-			}
-			// 输入的验证码不符合要求
-			if (!((String) obj).equals(randnum)) {
-				message = "您输入的验证码错误,请返回重新输入";
-				return "message";
-			}
-		}
+//		if (!request.getRemoteAddr().equals("127.0.0.1")) {
+//			if (obj == null) {
+//				message = "验证码已经过期,请返回重新输入";
+//				return "message";
+//			}
+//			// 输入的验证码不符合要求
+//			if (!((String) obj).equals(randnum)) {
+//				message = "您输入的验证码错误,请返回重新输入";
+//				return "message";
+//			}
+//		}
 		// 根据loginname得到用户个人信息
 		// SysUserDAO dao=new SysUserDAO();
 		SysUserService userService = (SysUserService) getBean("sysUserService");
@@ -79,14 +81,17 @@ public class UserLoginAction extends AbstractAction {
 		int loginResult = userService.userLogin(this.loginname, this.password);
 		LOG.debug("登录验证结果:::" + loginResult);
 		if (loginResult == -1) {
+			loginService.insertLoginLog(_remoteAddr,0, loginname,contextid, "帐号在系统中不存在");
 			message = "您输入的帐号在系统中不存在,请确认";
 			return "message";
 		}
 		if (loginResult == -2) {
+			loginService.insertLoginLog(_remoteAddr,0, loginname,contextid, "帐号已被禁用");
 			message = "您的帐号已被禁用,请联系管理员";
 			return "message";
 		}
 		if (loginResult == -3) {
+			loginService.insertLoginLog(_remoteAddr,0, loginname,contextid, "帐号密码错误");
 			message = "您输入的密码错误,请返回重新输入";
 			return "message";
 		}
@@ -108,7 +113,7 @@ public class UserLoginAction extends AbstractAction {
 		// 将其登录信息存入t_sys_loginlog表中,同时将其他此userid的Islast=1的数据全部改为0
 
 		SysUser sysUser = userService.getSysUser();
-		SysLoginLogService loginService = (SysLoginLogService) getBean("sysLoginLogService");
+
 		sysUser.setLoginCount(loginService.getLoginCountByUserId(sysUser.getUserid()));
 		sysUser.setLastLoginTime(loginService.getLastLoginTime(sysUser.getUserid()));
 		// 插入登录信息表
@@ -118,7 +123,7 @@ public class UserLoginAction extends AbstractAction {
 		// return "message";
 
 		HttpServletResponse response = (HttpServletResponse) ctx.get(ServletActionContext.HTTP_RESPONSE);
-		String _remoteAddr = request.getRemoteAddr();
+		
 		LOG.debug("系统每次启动后的标志ID:" + contextid);
 		if (savecookie) {
 			Cookie cookie = new Cookie(Constants.COOKIE_LOGINNAME, this.loginname);
@@ -154,9 +159,9 @@ public class UserLoginAction extends AbstractAction {
 		this.password = password;
 	}
 
-	public void setRandnum(String randnum) {
-		this.randnum = randnum;
-	}
+//	public void setRandnum(String randnum) {
+//		this.randnum = randnum;
+//	}
 
 	public void setPasivelogin(String login) {
 		this.pasivelogin = login;
@@ -167,13 +172,8 @@ public class UserLoginAction extends AbstractAction {
 	public void setSavecookie(boolean savecookie) {
 		this.savecookie = savecookie;
 	}
-	
-
 
 	public UserLoginAction() {
 		this.needsession = false;
 	}
-
-
-
 }

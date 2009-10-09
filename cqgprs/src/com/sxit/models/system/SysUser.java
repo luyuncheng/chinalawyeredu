@@ -3,6 +3,7 @@ package com.sxit.models.system;
 // Generated 2008-2-21 9:22:49 by Hibernate Tools 3.2.0.CR1
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class SysUser implements java.io.Serializable {
 
 	private int userid;
 	private int groupid;
-	private int locationid;
+	// private int locationid;
 	private SysGroup sysGroup;
 	// private String department;
 	private String loginname;
@@ -102,7 +103,17 @@ public class SysUser implements java.io.Serializable {
 	 */
 	private List<SysRight> userMenus;
 
+	private List<SysRight> topMenus=new ArrayList<SysRight>();
+
+	public List<SysRight> getTopMenus() {
+		return this.topMenus;
+	}
+
 	public void setUserMenus(List<SysRight> userMenus) {
+		for (SysRight right : userMenus) {
+			if (right.getParentcode().equals("0") || right.getGrade() == 1)
+				topMenus.add(right);
+		}
 		this.userMenus = userMenus;
 	}
 
@@ -302,43 +313,43 @@ public class SysUser implements java.io.Serializable {
 		this.groupid = groupid;
 	}
 
-	public int getLocationid() {
-		return locationid;
-	}
-
-	public void setLocationid(int locationid) {
-		this.locationid = locationid;
-	}
+	// public int getLocationid() {
+	// return locationid;
+	// }
+	//
+	// public void setLocationid(int locationid) {
+	// this.locationid = locationid;
+	// }
 
 	// 将locationid拆成provinceid,cityid,districtid
 
-//	private int provinceid;
-//	private int cityid;
-//	private int districtid;
+	// private int provinceid;
+	// private int cityid;
+	// private int districtid;
 
-//	public int getProvinceid() {
-//		return provinceid;
-//	}
-//
-//	public void setProvinceid(int provinceid) {
-//		this.provinceid = provinceid;
-//	}
-//
-//	public int getCityid() {
-//		return cityid;
-//	}
-//
-//	public void setCityid(int cityid) {
-//		this.cityid = cityid;
-//	}
-//
-//	public int getDistrictid() {
-//		return districtid;
-//	}
-//
-//	public void setDistrictid(int districtid) {
-//		this.districtid = districtid;
-//	}
+	// public int getProvinceid() {
+	// return provinceid;
+	// }
+	//
+	// public void setProvinceid(int provinceid) {
+	// this.provinceid = provinceid;
+	// }
+	//
+	// public int getCityid() {
+	// return cityid;
+	// }
+	//
+	// public void setCityid(int cityid) {
+	// this.cityid = cityid;
+	// }
+	//
+	// public int getDistrictid() {
+	// return districtid;
+	// }
+	//
+	// public void setDistrictid(int districtid) {
+	// this.districtid = districtid;
+	// }
 
 	/**
 	 * 可以考虑通过代理来实现
@@ -346,16 +357,15 @@ public class SysUser implements java.io.Serializable {
 	 * @param field
 	 * @return
 	 */
-//	public int getFieldvalue(String field) {
-//		if (field.equalsIgnoreCase("provinceid"))
-//			return this.provinceid;
-//		if (field.equalsIgnoreCase("cityid"))
-//			return this.cityid;
-//		if (field.equalsIgnoreCase("districtid"))
-//			return this.districtid;
-//		return 0;
-//	}
-
+	// public int getFieldvalue(String field) {
+	// if (field.equalsIgnoreCase("provinceid"))
+	// return this.provinceid;
+	// if (field.equalsIgnoreCase("cityid"))
+	// return this.cityid;
+	// if (field.equalsIgnoreCase("districtid"))
+	// return this.districtid;
+	// return 0;
+	// }
 	public SysGroup getSysGroup() {
 		return sysGroup;
 	}

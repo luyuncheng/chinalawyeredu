@@ -29,7 +29,7 @@ import com.sxit.system.util.RightTree;
  * 
  * web容器启动和关闭的时候，所需要做的操作。不包括以kill的方式删除进程
  * 
- * @author 华锋 2009-1-5  上午09:16:34
+ * @author 华锋 2009-1-5 上午09:16:34
  * 
  */
 public class WebContextListener implements ServletContextListener {
@@ -81,8 +81,7 @@ public class WebContextListener implements ServletContextListener {
 			SysLoginLogService service = (SysLoginLogService) globals.getBean("sysLoginLogService");
 			service.updateLogoutInfo(contextid);
 			LOG.info("容器退出时，记录用户的会话失效信息OK！");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			LOG.error("容器退出时，记录用户的会话失效信息失败！" + e);
 		}
 
@@ -96,38 +95,29 @@ public class WebContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 
 		try {
-			Globals globals = new Globals();
-//			SysRightService rightService = (SysRightService) globals.getBean("sysRightService");
-			BasicService basicService=(BasicService)globals.getBean("basicService");
-			List list=basicService.findAll(SysParameter.class);
-//			List chanellist=basicService.findAll(CoreChannel.class);
-			int length=list==null?0:list.size();
-			for(int i=0;i<length;i++){
-				SysParameter param=(SysParameter)list.get(i);
+
+			BasicService basicService = (BasicService) Globals.getBean("basicService");
+			List list = basicService.findAll(SysParameter.class);
+			// List chanellist=basicService.findAll(CoreChannel.class);
+			int length = list == null ? 0 : list.size();
+			for (int i = 0; i < length; i++) {
+				SysParameter param = (SysParameter) list.get(i);
 				CommonDatas.SysParameter.put(param.getParamname(), param.getParamvalue());
 			}
-			
-//			for(int i=0;chanellist!=null&&i<chanellist.size();i++){
-//				CoreChannel param=(CoreChannel)chanellist.get(i);
-//				CommonDatas.ALLCHANELS.put(param.getId(), param.getName());
-//			}
-			
-			if(CommonDatas.SysParameter.containsKey("sysname")){
-				Constants.SYS_NAME=CommonDatas.SysParameter.get("sysname").toString();
-			}
-			if(CommonDatas.SysParameter.containsKey("resourcepath")){
-				Constants.RESOURCE_PATH=CommonDatas.SysParameter.get("resourcepath").toString();
-			}
-			if(CommonDatas.SysParameter.containsKey("resourcepathmanage")){
-				Constants.RESOURCE_PATH_MANAGE=CommonDatas.SysParameter.get("resourcepathmanage").toString();
-			}
-			//获得所有的权限列表信息
-			RightTree.setRightList(basicService.findAll(SysRight.class));
-			
 
-			
-		}
-		catch (ServiceException e) {
+			if (CommonDatas.SysParameter.containsKey("sysname")) {
+				Constants.SYS_NAME = CommonDatas.SysParameter.get("sysname").toString();
+			}
+			if (CommonDatas.SysParameter.containsKey("resourcepath")) {
+				Constants.RESOURCE_PATH = CommonDatas.SysParameter.get("resourcepath").toString();
+			}
+			if (CommonDatas.SysParameter.containsKey("resourcepathmanage")) {
+				Constants.RESOURCE_PATH_MANAGE = CommonDatas.SysParameter.get("resourcepathmanage").toString();
+			}
+			// 获得所有的权限列表信息
+			RightTree.setRightList(basicService.findAll(SysRight.class));
+
+		} catch (ServiceException e) {
 			LOG.error("系统启动初始化权限列表为空" + e);
 		}
 		String contextid = System.currentTimeMillis() / 1000 + "";

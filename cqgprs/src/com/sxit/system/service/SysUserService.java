@@ -264,7 +264,7 @@ public class SysUserService {
 	 * @return
 	 * @throws ServiceException
 	 */
-@Transactional
+	@Transactional
 	public int userLogin(final String loginName, final String password) throws ServiceException {
 		try {
 			TransactionTemplate transactionTemplate = new TransactionTemplate(this.transactionManager);
@@ -276,9 +276,9 @@ public class SysUserService {
 						sysUser = sysUserDAO.getSysUser();// 登录成功了，获取其他信息等
 						// LOG.debug("部门:" + sysUser.getSysGroup());
 						LOG.debug("角色:" + sysUser.getSysRoles());
-						
-					SysGroup groups=	sysUser.getSysGroup();
-					LOG.debug("所属的部门::"+groups);
+
+						SysGroup groups = sysUser.getSysGroup();
+						LOG.debug("所属的部门::" + groups);
 						// LOG.debug("权限:" + sysUser.getSysRights());
 						// 登录的时候获取下来与这个用户相关的一些数据下来
 						if (sysUser.getLoginname().equals("admin")) {
@@ -294,8 +294,6 @@ public class SysUserService {
 
 							List<SysRight> userMenus = getUserMenus(rights);
 							sysUser.setUserMenus(userMenus);
-							
-							
 
 						}
 
@@ -363,9 +361,9 @@ public class SysUserService {
 		Set<SysRight> rightList = new HashSet<SysRight>();
 		// if (!sysuser.getLoginname().equals("admin")) {
 		Set<SysRight> rights = sysuser.getSysRights();// 得到已经绑定好了的每人的权限
-		
-//		Set<SysRole> roles = sysuser.getSysRoles();// 得到每个人绑定好的角色
-		Set<SysRole> roles =null; //这个人的登录权限都从sys_user_rights中得来
+
+		// Set<SysRole> roles = sysuser.getSysRoles();// 得到每个人绑定好的角色
+		Set<SysRole> roles = null; // 这个人的登录权限都从sys_user_rights中得来
 		if (rights != null && rights.size() != 0) {// 绑定了权限
 			Iterator<SysRight> rightIterator = rights.iterator();
 			while (rightIterator.hasNext()) {// 根据sys_user_right得到right信息
@@ -521,10 +519,34 @@ public class SysUserService {
 		}
 		LOG.debug("menus.size()::::::::::" + menus.size());
 
+		menuIterator = menus.iterator();
+		while (menuIterator.hasNext()) {
+			SysRight right = menuIterator.next();
+			if (right.getHasChild()) {
+				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode());
+				Collections.sort(children, new RightComparator());
+				right.setChildren(children);
+			}
+		}
+
 		List<SysRight> list = new ArrayList<SysRight>();
 		list.addAll(menus);
 		// 将菜单排序
 		Collections.sort(list, new RightComparator());
+		menuIterator = list.iterator();
+		while (menuIterator.hasNext()) {
+			SysRight right = menuIterator.next();
+			List<SysRight> children = right.getChildren();
+			if (children != null) {
+				LOG.debug("right:" + right.getRightname());
+				for (SysRight r : children) {
+					LOG.debug("children:" + r.getRightname());
+				}
+			}
+		}
+
+		menus.clear();
+		menus = null;
 		return list;
 	}
 
@@ -622,6 +644,26 @@ public class SysUserService {
 				menus.add(right);
 			rightList.add(right);
 		}
+
+		for (SysRight right : menus) {
+			if (right.getHasChild()) {
+				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode());
+				Collections.sort(children, new RightComparator());
+				right.setChildren(children);
+			}
+		}
+
+		for (SysRight right : menus) {
+			List<SysRight> children = right.getChildren();
+
+			if (children != null) {
+				LOG.debug("right:" + right.getRightname());
+				for (SysRight r : children) {
+					LOG.debug("children:" + r.getRightname());
+				}
+			}
+		}
+
 		// menus.addAll(rightMenus);
 		// 将菜单排序
 		// Collections.sort(menus, new RightComparator());

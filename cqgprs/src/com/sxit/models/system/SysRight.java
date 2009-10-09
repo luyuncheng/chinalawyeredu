@@ -4,6 +4,7 @@ package com.sxit.models.system;
 // Generated 2008-2-21 9:22:49 by Hibernate Tools 3.2.0.CR1
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,6 +30,27 @@ public class SysRight implements java.io.Serializable {
 	private Set<SysUser> sysUsers = new HashSet<SysUser>(0);
 
 	private Set<SysRole> sysRoles = new HashSet<SysRole>(0);
+
+	/**
+	 * 判断是否是叶子节点
+	 */
+	private boolean hasChild;
+	private List<SysRight> children;
+	public List<SysRight> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<SysRight> children) {
+		this.children = children;
+	}
+
+	public boolean getHasChild() {
+		return this.hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
+	}
 
 	public SysRight() {
 	}

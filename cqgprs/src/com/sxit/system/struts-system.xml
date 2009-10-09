@@ -77,33 +77,7 @@
 			<result name="input" type="dispatcher">/system/sysRoleRight.jsp</result>
        </action>
        
-       <!-- 区域信息 
-       <action name="location" class="com.sxit.system.action.LocationAction">
-			<result name="success" type="dispatcher">/system/location.jsp</result>
-       </action>
-       
-         <action name="locationCreate" class="com.sxit.system.action.LocationCreateAction">
-			<result name="input" type="dispatcher">/system/locationCreate.jsp</result>
-			 <result name="success" type="dispatcher">/common/message2parent.jsp</result>
-       </action>
-       
-         <action name="locationDelete" class="com.sxit.system.action.LocationDeleteAction">
-			 <result name="success" type="dispatcher">/common/message2parent.jsp</result>
-       </action>
-       
-         <action name="locationEdit" class="com.sxit.system.action.LocationEditAction">
-			<result name="input" type="dispatcher">/system/locationEdit.jsp</result>
-			 <result name="success" type="dispatcher">/common/message2parent.jsp</result>
-       </action>
-       
-         <action name="locationTree" class="com.sxit.system.action.LocationTreeAction">
-			<result name="success" type="dispatcher">/system/locationTree.jsp</result>
-       </action>
-       
-       <action name="locationView" class="com.sxit.system.action.LocationViewAction">
-			<result name="success" type="dispatcher">/system/locationView.jsp</result>
-       </action>
-       -->
+     
         
        <!--部门管理-->
         <action name="sysGroupList" class="com.sxit.system.action.SysGroupListAction">
@@ -185,8 +159,6 @@
    	   <action name="checkLoginname" class="com.sxit.system.action.ajax.CheckLoginnameAction">
 			<result name="success" type="json"></result>
    	   </action>
-   	   	   <action name="locationList" class="com.sxit.system.action.ajax.LocationListAction">
-			<result name="success" type="json"></result>
-   	   </action>
+   	   	
    </package>
 </struts>

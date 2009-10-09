@@ -32,18 +32,11 @@ import com.sxit.system.util.RightTree;
  * @author 华锋 2009-1-5 下午04:54:59 Tompan 2009-3-13修改去掉异常的日志记录
  * 
  */
-public abstract class AbstractAction extends ActionSupport implements ServletResponseAware {
+public abstract class AbstractAction extends ActionSupport  {
 	private static Log _LOG = LogFactory.getLog(AbstractAction.class);
 	/**
 	 * 当前action对应的rightCode
 	 */
-	HttpServletResponse response;
-
-	public void setServletResponse(HttpServletResponse arg0) {
-
-		this.response = arg0;
-
-	}
 
 	protected String rightCode;
 	/**

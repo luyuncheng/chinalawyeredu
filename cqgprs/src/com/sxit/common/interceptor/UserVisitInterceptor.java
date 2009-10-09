@@ -15,34 +15,41 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 /**
  * 拦截器，判断是否有权限以及是否已经登录 1、记录访问的来源ip和访问的action
  * 
- * @author 华锋 2009-1-5  下午02:14:38
+ * @author 华锋 2009-1-5 下午02:14:38
  * 
  */
 public class UserVisitInterceptor implements Interceptor {
 
 	private static final Log LOG = LogFactory.getLog(UserVisitInterceptor.class);
-    
+
 	public void destroy() {
 		LOG.debug("UserVisitInterceptor Destroying...");
 	}
-    
+
 	public void init() {
 		LOG.debug("UserVisitInterceptor Init...");
 	}
-    
+
 	public String intercept(ActionInvocation invocation) throws Exception {
 		ActionContext context = ActionContext.getContext();
-//		String action = context.getName();
-	//	context.get(ServletActionContext.APPLICATION);
 		
+		long now = System.currentTimeMillis();
+
 		HttpServletRequest request = (HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);
 		String ip = ((HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST)).getRemoteAddr();
-		LOG.info(ip + ":" +request.getRequestURI());
-		//最理想的,在这里,通过这个url从数据库找到对应的rightcode。从而在代码中免除设置rightcode
-		//有个问题,abc!input.pl实际上是等于abc.pl的.一个是入口,一个是保存
-		
-		//webcontext初始化的时候,得到系统所有的rightcode到内存中
-		return invocation.invoke();
+
+		// 最理想的,在这里,通过这个url从数据库找到对应的rightcode。从而在代码中免除设置rightcode
+		// 有个问题,abc!input.pl实际上是等于abc.pl的.一个是入口,一个是保存
+
+		// webcontext初始化的时候,得到系统所有的rightcode到内存中
+		String result = "error";
+		try {
+			result = invocation.invoke();
+		} catch (Exception e) {
+
+		}
+		LOG.info(ip + ":" + request.getRequestURI() + ">" + (System.currentTimeMillis() - now));
+		return result;
 	}
 
 	/**
@@ -50,12 +57,5 @@ public class UserVisitInterceptor implements Interceptor {
 	 * 
 	 * @return
 	 */
-//	public String getCururl() {
-//		ActionContext ctx = ActionContext.getContext();
-//		HttpServletRequest request = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
-//		String url1 = request.getRequestURL().toString();
-//        return url1;
-//		//	String url2 = request.getQueryString();
-//	//	return url1 + (url2 == null ? "" : "?" + url2);
-//	}
+
 }
