@@ -179,7 +179,7 @@ input,button {background:url(../images/bgGray.gif) repeat-x center top;}
 .tdPrint {color:#B40006;}
 .tdView {color:#505050;}
 .tdDelete {color:#002780;}
-
+.cR{color:red;}
 
 .help img {color:#000;background:url(../images/help.gif) no-repeat 0 0;}
 .blank img {color:#000;background:url(../images/external.png) no-repeat 0 0;}
