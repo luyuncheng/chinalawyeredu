@@ -25,6 +25,7 @@ $(function(){
 	function loadSkinUrl(em,o,p){
 		$(em).attr("href","skin/"+$(o).attr(p)+"/css/style.css");
 	}
+	
 
 	/* 滚动 */
 	function ScrollImgLeft(dStart,dEnd,DContainer,speed){
