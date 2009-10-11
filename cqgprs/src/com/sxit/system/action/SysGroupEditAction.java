@@ -5,8 +5,10 @@ package com.sxit.system.action;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
+
 import com.sxit.common.BasicService;
-import com.sxit.common.Constants;
 import com.sxit.common.action.AbstractAction;
 import com.sxit.models.system.SysGroup;
 import com.sxit.system.service.SysGroupService;
@@ -60,7 +62,9 @@ public class SysGroupEditAction extends AbstractAction {
 	public String input() throws Exception {
 		SysGroup sysGroup=service.get(groupid);
 		BasicService bs = (BasicService) this.getBean("basicService");
-		parentList = bs.findAll(SysGroup.class);
+		DetachedCriteria dc=DetachedCriteria.forClass(SysGroup.class).add(Restrictions.ne("groupid", groupid));
+		parentList = bs.findAllByCriteria(dc);
+		
 
 		this.set("sysGroup", sysGroup);
 		return INPUT;

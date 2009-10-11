@@ -20,7 +20,7 @@
 	
 	<include file="com/sxit/system/struts-system.xml" />
     <include file="com/sxit/common/struts-common.xml" />
-     <include file="com/sxit/common/struts-log.xml" />
+    <include file="com/sxit/log/struts-log.xml" />
   
 	<package name="default" extends="struts-default">
      	<interceptors>

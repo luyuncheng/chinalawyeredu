@@ -7,7 +7,10 @@
 
         <id name="groupid" type="int">
             <column name="GROUPID" precision="5" scale="0" />
-            <generator class="identity" />
+                <generator class="identity" />
+             <!--   <generator class="sequence">
+            <param name="sequence">jf_sequence</param>
+            </generator>-->
         </id>
         
         <property name="parentid" type="int">

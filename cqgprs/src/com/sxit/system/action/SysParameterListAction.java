@@ -60,7 +60,9 @@ public class SysParameterListAction extends AbstractListAction {
 	@Override
 	protected String go() throws Exception {
 
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(SysParameter.class).add(Restrictions.eq("typeid",typeid));
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(SysParameter.class);
+		
+//		.add(Restrictions.eq("typeid",typeid));
 		// 这里要判断出登录帐号所属的group
 		// 如果是admin，看所有的，如果不是admin,则根据登录人员的所属角色,判断角色对用户和对部门的可见性
 

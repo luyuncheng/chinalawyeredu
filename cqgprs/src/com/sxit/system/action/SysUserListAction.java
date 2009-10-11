@@ -83,7 +83,7 @@ public class SysUserListAction extends AbstractListAction {
 	 */
 	@Override
 	protected String go() throws Exception {
-		this.pageSize=3;
+
 		SysUser user=this.getLoginUser();
 		if(user.getRightList().contains("sysUserRightPre")||user.getLoginname().equals("admin"))
 			hassetrights=true;

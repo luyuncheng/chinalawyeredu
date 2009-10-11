@@ -118,32 +118,7 @@
        <action name="sysParameterDelete" class="com.sxit.system.action.SysParameterDeleteAction">
        </action>  
        
-        
        
-       <!--操作日志查询
-        <action name="sysOperLogList" class="com.sxit.system.action.SysOperLogListAction">
-        	<interceptor-ref name="hibernateSessionStack"/>
-			<result name="list" type="dispatcher">/system/sysOperLogList.jsp</result>
-			<result name="excel" type="dispatcher">/system/sysOperLogList2Excel.jsp</result>
-       </action>
-       <action name="sysOperLogDelete" class="com.sxit.system.action.SysOperLogDeleteAction">
-			<result name="success" type="redirect">/system/sysOperLogList.action</result>
-       </action>
-       <action name="sysOperLogBatchDelete" class="com.sxit.system.action.SysOperLogBatchDeleteAction">
-			<result name="success" type="redirect">/system/sysOperLogList.action</result>
-       </action>
-   
-        <action name="sysloginLogList" class="com.sxit.system.action.SysLoginLogListAction">
-        	<interceptor-ref name="hibernateSessionStack"/>
-			<result name="list" type="dispatcher">/system/sysLoginLogList.jsp</result>
-			<result name="excel" type="dispatcher">/system/sysLoginLogList2Excel.jsp</result>
-        </action>
-        <action name="sysLoginLogDelete" class="com.sxit.system.action.SysLoginLogDeleteAction">
-			<result name="success" type="redirect">/system/sysloginLogList.action</result>
-       </action>
-       <action name="sysLoginLogBatchDelete" class="com.sxit.system.action.SysLoginLogBatchDeleteAction">
-			<result name="success" type="redirect">/system/sysloginLogList.action</result>
-       </action>-->
    </package>
    
    <package name="systemajax" extends="defaultajax" namespace="/systemajax">
