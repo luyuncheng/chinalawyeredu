@@ -143,10 +143,45 @@ public class PaginationSupport {
 			return previousIndex;
 	}
 	//每页30条,0,30,60,90,120
-    private String pageView;
-    public void setPageView(String view){
-    	this.pageView=view;
-    }
+//    private String pageView;
+//    public void setPageView(String view){
+//    	this.pageView=view;
+//    }
+//	public String getPageView() {
+//		StringBuffer sb = new StringBuffer();
+//		int pageNo=(this.startIndex/this.pageSize)+1;
+//		
+//		//int pageNum = (this.totalCount + pageSize - 1) / pageSize;
+//		int pageNum=this.count;
+//		
+//		if (pageNum > 0) {
+//			sb.append("总计").append(totalCount).append("条记录,第").append(pageNo).append("页,共").append(pageNum).append("页");
+////			if (pageNum == 1) {
+////				sb.append("首页 前页 后页 末页");
+////			}
+////			else {
+//			if(pageNum>1)
+//			{
+//				sb.append(",");
+//				if (pageNo == 1) {
+//					sb.append("首页 前页");
+//				}
+//				else {
+//					sb.append("<a href=\"#\" onclick=fanye(").append(1).append(")>首页</a> <a href=\"#\" onclick=fanye(")
+//							.append(pageNo - 1).append(")>前页</a>");
+//				}
+//				if (pageNo == pageNum) {
+//					sb.append(" 后页 末页");
+//				}
+//				else {
+//					sb.append(" <a href=\"#\" onclick=fanye(").append(pageNo + 1).append(
+//							")>后页</a> <a href=\"#\" onclick=fanye(").append(pageNum).append(")>末页</a>");
+//				}
+//			}
+//		}
+//		return sb.toString();
+//	}
+	
 	public String getPageView() {
 		StringBuffer sb = new StringBuffer();
 		int pageNo=(this.startIndex/this.pageSize)+1;
@@ -155,26 +190,31 @@ public class PaginationSupport {
 		int pageNum=this.count;
 		
 		if (pageNum > 0) {
-			sb.append("总计").append(totalCount).append("条记录,第").append(pageNo).append("页,共").append(pageNum).append("页");
-//			if (pageNum == 1) {
+//			sb.append("总计").append(totalCount).append("条记录,第").append(pageNo).append("页,共").append(pageNum).append("页");
+
+			
+			sb.append("<span class='page-move'>").append(totalCount).append("条记录</span> ");
+			sb.append("<span class='page-total'>共").append(pageNum).append("页,第").append(pageNo).append("页</span>");
+			
+			//			if (pageNum == 1) {
 //				sb.append("首页 前页 后页 末页");
 //			}
 //			else {
 			if(pageNum>1)
 			{
-				sb.append(",");
+				sb.append(" ");
 				if (pageNo == 1) {
-					sb.append("首页 前页");
+//					sb.append("<a href='javascript:void(0)'>首页</a> <a href='javascript:void(0)'>前页</a>");
 				}
 				else {
-					sb.append("<a href=\"#\" onclick=fanye(").append(1).append(")>首页</a> <a href=\"#\" onclick=fanye(")
+					sb.append("<a href=\"javascript:void(0)\" onclick=fanye(").append(1).append(")>首页</a> <a href=\"#\" onclick=fanye(")
 							.append(pageNo - 1).append(")>前页</a>");
 				}
 				if (pageNo == pageNum) {
-					sb.append(" 后页 末页");
+//					sb.append(" <a href='javascript:void(0)'>后页</a> <a href='javascript:void(0)'>末页</a>");
 				}
 				else {
-					sb.append(" <a href=\"#\" onclick=fanye(").append(pageNo + 1).append(
+					sb.append(" <a href=\"javascript:void(0)\" onclick=fanye(").append(pageNo + 1).append(
 							")>后页</a> <a href=\"#\" onclick=fanye(").append(pageNum).append(")>末页</a>");
 				}
 			}

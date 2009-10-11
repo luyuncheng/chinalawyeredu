@@ -20,13 +20,8 @@
 	
 	<include file="com/sxit/system/struts-system.xml" />
     <include file="com/sxit/common/struts-common.xml" />
-    <include file="com/sxit/wait/struts-wait.xml" />
-    <include file="com/sxit/info/struts-info.xml" />
-     <include file="com/sxit/workflow/struts-workflow.xml" />
-     <include file="com/sxit/users/struts-users.xml" />
-	  <include file="com/sxit/log/struts-log.xml" />
-	  <include file="com/sxit/content/struts-content.xml" />
-	   <include file="com/sxit/service/struts-service.xml" />
+     <include file="com/sxit/common/struts-log.xml" />
+  
 	<package name="default" extends="struts-default">
      	<interceptors>
 			<interceptor name="userverify" class="com.sxit.common.interceptor.UserVerifyInterceptor"/>

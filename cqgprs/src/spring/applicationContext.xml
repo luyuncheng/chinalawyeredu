@@ -8,15 +8,17 @@
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName">
       <value>com.mysql.jdbc.Driver</value>
+     <!-- <value>oracle.jdbc.driver.OracleDriver</value>-->
     </property>
     <property name="url">
-       <value>jdbc:mysql://211.154.157.174:3306/tianwei?characterEncoding=UTF-8</value>
+      <value>jdbc:mysql://localhost:3306/cqgprs?characterEncoding=UTF-8</value>
+        <!--<value>jdbc:oracle:thin:@10.10.3.198:1521:ora11</value>-->
     </property>
     <property name="username">
       <value>root</value>
     </property>
     <property name="password">
-      <value>password</value>
+      <value>root</value>
     </property>
   </bean>   
   
@@ -28,11 +30,10 @@
         </property>       
         <property name="hibernateProperties">       
             <props>       
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>    
-                
-                 <prop key="hibernate.hbm2ddl.auto">none</prop>
-      
-            	 <prop key="hibernate.show_sql">true</prop>
+               <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>   
+              <!--<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->   
+              <prop key="hibernate.hbm2ddl.auto">none</prop>
+              <prop key="hibernate.show_sql">true</prop>
                <prop key="hibernate.generate_statistics">false</prop>       
                <prop key="hibernate.connection.release_mode">auto</prop>       
                <prop key="hibernate.autoReconnect">true</prop> 
