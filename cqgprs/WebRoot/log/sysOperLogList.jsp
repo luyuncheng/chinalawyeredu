@@ -13,7 +13,7 @@
  <link rel="stylesheet" type="text/css" href="../css/pager.css" />
  <script type="text/javascript" src="../js/jquery.js"></script>
  <jscalendar:head/>
- <script language="javascript">
+ <script type="text/javascript">
 function fanye(str){
   document.form1.pageNo.value=str;
   document.form1.submit()
@@ -50,10 +50,12 @@ document.form1.submit();
                                  <s:hidden name="pageNo"/>
 								 <td>操作人员:<s:textfield name="username" size="10" cssClass="txt"/>&nbsp;
 								 </td>
-								 <td>操作时间从:<jscalendar:jscalendar name="loginTime"/>
+								 <td>操作时间从:<jscalendar:jscalendar name="loginTime" cssClass="txt"/>
                            	<s:hidden name="totype" id="totype"/>&nbsp;
 								 </td>
-								 <td><input type="submit" class="btnSubmit " title="查　询" value="查　询"/>
+								 <td>
+								  <input type="button" value="查　询" class="btnSubmit" onclick="query()"/>
+                  	              <input type="button" value="导  出" class="btnSubmit" onclick="export()"/>
 								 </td>
 							     <td>
 							     </td>
@@ -61,11 +63,11 @@ document.form1.submit();
 							</tbody>
 						</table>
 				  </div> 
-					<!-- 操作模块-->
+					<!-- 操作模块
 					<div class="operate">
 						<input type="button" class="btnSubmit" title="保 存" value="新　增" onclick="getAdd()"/>
-					<!-- <input type="button" class="btnCancel" title="返 回" value="删　除"/>-->
-					</div>
+					 <input type="button" class="btnCancel" title="返 回" value="删　除"/>
+					</div>-->
 				  <div class="tablist">
 			        <table class="tableBox" id="a">
                       <thead>

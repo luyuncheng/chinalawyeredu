@@ -1,4 +1,4 @@
-﻿ page contentType="text/html;charset=utf-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,12 +10,15 @@
  <title>${sysName }-角色权限修改</title>
  <link rel="stylesheet" type="text/css" href="../css/reset.css" />
  <link rel="stylesheet" type="text/css" href="../css/main.css" />
- <script type="text/javascript" src="../js/jquery.js"></script>
+ <link rel="stylesheet" type="text/css" href="../css/dtree.css" />
  <script type="text/javascript" src="../js/dtreeselect.js"></script>
 <script type="text/javascript">
 function newselright(objid,objtext,checked){
+//alert(objid+",,"+objtext+",,"+checked);
   var _select=document.getElementById("assignedRightcodeId");
+//  alert(_select);
   if(checked){
+ // alert("===");
 	  	var opt = new Option(objtext, objid);
 		_select.options.add(opt)
    }else{
@@ -53,7 +56,7 @@ function selright(obj,objtext){
 				</div>
 			</div>
 	</div>
-	<s:form name="form1" action="sysUserCreate" method="post" validate="true">
+	
 	<div class="main">
 		<div class="inmain">
 			<div class="wrap">
@@ -68,7 +71,7 @@ function selright(obj,objtext){
 					<table class="operateTabBox">
 						<tbody>
 							<tr>
-								<td class="w150 fname" style="text-align:center;font:bold">请选择需分配的权限</td>
+								<td class="w350 fname" style="text-align:center;font:bold">请选择需分配的权限</td>
 								<td style="text-align:center;font:bold">
 								 已分配权限列表
 								</td>
@@ -95,7 +98,7 @@ function selright(obj,objtext){
 </div>		
 								</td>
 								<td>
-  <s:form name="form1" action="sysRoleRight" method="post" validate="true">
+  <s:form name="form1" action="sysRoleRight" method="post">
         <s:hidden name="roleid"/>
         <select name="assignedRightcode" id="assignedRightcodeId" style="width:250px;height:360px" multiple="multiple">
           <s:iterator value="assignedRights" status="stat">
@@ -111,7 +114,6 @@ function selright(obj,objtext){
 			</div>
 		</div>
 	</div>
-</s:form>
   <script type="text/javascript">
   function formsub(){
     //提交之前将所有的选项都选中

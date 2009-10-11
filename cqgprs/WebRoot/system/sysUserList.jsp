@@ -11,7 +11,43 @@
  <link rel="stylesheet" type="text/css" href="../css/main.css" />
  <link rel="stylesheet" type="text/css" href="../css/pager.css" />
  <script type="text/javascript" src="../js/jquery.js"></script>
- <script language="javascript">
+ <script type="text/javascript">
+ $(document).ready(function() {
+			$("#checkAll").click(selectAll);
+			$("[name=check]").click(selectOne);
+		});
+		var l=0;
+	function selectAll() {
+			 var checkbox = $("#checkForm :checkbox");
+			 if(!$(this).attr('checked')){
+				checkbox.attr('checked','');
+				checkbox.parent().parent().children().addClass("current");
+				checkbox.parent().parent().children().removeClass("nomal");
+			 }else{
+				checkbox.attr('checked','checked');
+				checkbox.parent().parent().children().addClass("nomal");
+				checkbox.parent().parent().children().removeClass("current");
+			}
+			selectOne();
+		}
+
+		/*单选取值*/
+		function selectOne(){
+		//	var str="";
+			$("[name=check]").each(function(){
+				if($(this).attr('checked')){
+					$(this).parent().parent().children().addClass("current");
+					$(this).parent().parent().children().removeClass("nomal");
+				//	str+=$(this).val()+"|";
+					l=$("[name=check]:checked").size();
+				}else{
+					$(this).parent().parent().children().addClass("nomal");
+					$(this).parent().parent().children().removeClass("current");
+					$("#checkAll").attr('checked','');
+				}
+			})
+      }
+ 
 function fanye(str){
   document.form1.pageNo.value=str;
   document.form1.submit();
@@ -19,7 +55,7 @@ function fanye(str){
 function getAdd(){
 	window.location.href="sysUserCreate!input.action";
 }
-function deleteInfo(paramname){
+function deleteUser(userid){
   if(confirm('您确定要删除这个用户吗?'))
     window.location.href="sysUserDelete.action?check="+userid;
   return false;
@@ -46,7 +82,7 @@ function deleteInfo(paramname){
 								<tr>
                                  <s:hidden name="pageNo"/>
 								 <td>登录名：<s:textfield name="loginname" size="10" cssClass="txt"/>&nbsp;</td>
-								 <td><input type="submit" class="btnSubmit " title="查　询" value="查　询"/></td>
+								 <td><input type="submit" class="btnSubmit" title="查　询" value="查　询"/></td>
 							     <td></td>
 								</tr>
 							</tbody>
@@ -55,12 +91,15 @@ function deleteInfo(paramname){
 					<!-- 操作模块-->
 					<div class="operate">
 						<input type="button" class="btnSubmit" title="保 存" value="新　增" onclick="getAdd()"/>
-					<!-- <input type="button" class="btnCancel" title="返 回" value="删　除"/>-->
+					    <input type="button" class="btnCancel" title="返 回" value="删　除"/>
 					</div>
 				  <div class="tablist">
 			        <table class="tableBox" id="a">
                       <thead>
                         <tr>
+                          <th>
+                          <input type="checkbox" class="checkbox" name="checkAll"  id="checkAll"/>
+                          </th>
                           <th>姓名</th>
                           <th>账号</th>
                           <th>所在部门</th>
@@ -78,6 +117,7 @@ function deleteInfo(paramname){
                       <tbody id="checkForm">
                         <s:iterator value="page.items" status="status">
                         <tr>
+                          <td><input type="checkbox" class="checkbox" name="check" value="${userid }"/></td>
                           <td>${username}</td>
                           <td>${loginname }</td>
                           <td>${sysGroup.groupname}</td>

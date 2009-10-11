@@ -90,7 +90,7 @@
 							<tr>
 								<td class="fname" valign="top">备注说明：</td>
 								<td>
-								 <s:textarea name="sysGroup.comments" rows="5" cols="40"/>
+								 <s:textarea name="sysGroup.comments" rows="5" cols="40" cssClass="txt"/>
 								</td>
 							</tr>
 					

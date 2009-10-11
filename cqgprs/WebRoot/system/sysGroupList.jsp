@@ -11,7 +11,7 @@
  <link rel="stylesheet" type="text/css" href="../css/main.css" />
  <link rel="stylesheet" type="text/css" href="../css/pager.css" />
  <script type="text/javascript" src="../js/jquery.js"></script>
- <script language="javascript">
+ <script type="text/javascript">
 function fanye(str){
   document.form1.pageNo.value=str;
   document.form1.submit();
@@ -46,7 +46,7 @@ function delGroup(groupid,parentid){
 							<tbody>
 								<tr>
                                  <s:hidden name="pageNo"/>
-								 <td>部门名称：<s:textfield name="groupname" size="10"/>&nbsp;
+								 <td>部门名称：<s:textfield name="groupname" size="10" cssClass="txt"/>&nbsp;
 								 </td>
 								 <td><input type="submit" class="btnSubmit " title="查　询" value="查　询"/>
 								 </td>

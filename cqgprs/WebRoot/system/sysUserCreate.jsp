@@ -90,7 +90,7 @@ function checkRole(obj,roleid){
 			<div class="wrap">
 				<!-- 操作模块 -->
 				<div class="operate">
-					<input type="submit" class="btnSubmit" title="保 存" value="保 存"/>
+					<input type="submit" class="btnSubmit" title="保 存" value="保 存" id="save"/>
 					<input type="button" class="btnBack" title="返 回" value="返 回" onclick="history.go(-1)"/>
 				</div>
 				<div class="operateTab">

@@ -1,4 +1,4 @@
-﻿ page contentType="text/html;charset=utf-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,7 +10,10 @@
  <title>${sysName }-管理员权限修改</title>
  <link rel="stylesheet" type="text/css" href="../css/reset.css" />
  <link rel="stylesheet" type="text/css" href="../css/main.css" />
+ <link rel="stylesheet" type="text/css" href="../css/dtree.css" />
+ <!-- 
  <script type="text/javascript" src="../js/jquery.js"></script>
+ -->
  <script type="text/javascript" src="../js/dtreeselect.js"></script>
 <script type="text/javascript">
 function newselright(objid,objtext,checked){
@@ -54,7 +57,6 @@ function selright(obj,objtext){
 				</div>
 			</div>
 	</div>
-	<s:form name="form1" action="sysUserCreate" method="post" validate="true">
 	<div class="main">
 		<div class="inmain">
 			<div class="wrap">
@@ -75,7 +77,7 @@ function selright(obj,objtext){
 								</td>
 							</tr>
 							<tr>
-								<td class="fname" valign="top">
+								<td class="w350 fname" valign="top">
 								 <div style="margin-top:3px;text-align:left;overflow:auto;height:350px">
        <div id="dtree1" class="dtree">
 	<script type="text/javascript">
@@ -111,8 +113,7 @@ function selright(obj,objtext){
 			</div>
 		</div>
 	</div>
-</s:form>
-  <script language="javascript" type="text/javascript">
+  <script type="text/javascript">
   function formsub(){
     //提交之前将所有的选项都选中
   var _select=document.getElementById("assignedRightcodeId");

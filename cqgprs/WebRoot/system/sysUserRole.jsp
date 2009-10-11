@@ -1,4 +1,4 @@
-﻿ page contentType="text/html;charset=utf-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,7 +48,7 @@ if(obj.checked){
 					<table class="operateTabBox">
 						<tbody>
 							<tr>
-								<td class="w150 fname">
+								<td class="w250 fname">
 								请选择角色：<br/>(已勾选的表示现在选中的角色)：
 								</td>
 								<td>

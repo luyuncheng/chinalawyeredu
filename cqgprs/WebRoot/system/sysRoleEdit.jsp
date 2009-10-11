@@ -62,7 +62,7 @@
 							<tr>
 								<td class="fname" valign="top">角色描述：</td>
 								<td>
-								 <s:textarea name="sysRole.comments" rows="5" cols="40"/>
+								 <s:textarea name="sysRole.comments" rows="5" cols="40" cssClass="txt"/>
 								</td>
 							</tr>
 					

@@ -60,7 +60,7 @@
 							<tr>
 								<td class="fname" valign="top">参数说明：</td>
 								<td>
-								<s:textarea name="sysParameter.comments" rows="5" cols="40"/>
+								<s:textarea name="sysParameter.comments" rows="5" cols="40" cssClass="txt"/>
 								</td>
 							</tr>
 					
