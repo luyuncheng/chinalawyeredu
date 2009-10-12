@@ -6,10 +6,10 @@
     <class name="com.sxit.models.log.SysLoginLog" table="SYS_LOGINLOG" >
         <id name="loginid" type="int">
             <column name="loginid" precision="10" scale="0" />
-            <generator class="identity" />
-             <!-- <generator class="sequence">
+      <!-- <generator class="identity" />-->
+          <generator class="sequence">
             <param name="sequence">jf_sequence</param>
-            </generator>-->
+            </generator>
         </id>
         <property name="userid" type="int">
             <column name="userid" precision="10" scale="0" not-null="true" />

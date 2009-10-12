@@ -523,7 +523,7 @@ public class SysUserService {
 		while (menuIterator.hasNext()) {
 			SysRight right = menuIterator.next();
 			if (right.getHasChild()) {
-				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode());
+				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode(),sysUser.getRightList());
 				Collections.sort(children, new RightComparator());
 				right.setChildren(children);
 			}
@@ -647,7 +647,7 @@ public class SysUserService {
 
 		for (SysRight right : menus) {
 			if (right.getHasChild()) {
-				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode());
+				List<SysRight> children = RightTree.getDirectChildRights(right.getRightcode(),null);
 				Collections.sort(children, new RightComparator());
 				right.setChildren(children);
 			}

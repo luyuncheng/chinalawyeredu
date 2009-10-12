@@ -5,6 +5,7 @@
 package com.sxit.system.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import com.sxit.models.system.SysRole;
 import com.sxit.models.system.SysUser;
 import com.sxit.system.service.SysUserService;
 import com.sxit.system.util.CommonDatas;
+import com.sxit.system.util.RightComparator;
 import com.sxit.system.util.RightTree;
 
 /**
@@ -107,7 +109,11 @@ public class SysUserRightAction extends AbstractAction {
 			
 			
 //			Set<SysRight> rights=roles.iterator().next().getSysRights();
-			allRights=roles.iterator().next().getSysRights();
+			Set<SysRight> _allRights=roles.iterator().next().getSysRights();
+			allRights=new ArrayList<SysRight>();
+			allRights.addAll(_allRights);
+			// 将菜单排序
+			Collections.sort(allRights, new RightComparator());
 //			Set<SysRight> rights=sysUserSelf.getSysRights();
 //			allRights=userService.getUserMenus(rights);
 			
@@ -183,9 +189,9 @@ public class SysUserRightAction extends AbstractAction {
 	/**
 	 * 所有需要分配的权限列表
 	 */
-	private Set<SysRight> allRights ;
+	private List<SysRight> allRights ;
 
-	public Set<SysRight> getAllRights() {
+	public List<SysRight> getAllRights() {
 		return this.allRights;
 	}
 }

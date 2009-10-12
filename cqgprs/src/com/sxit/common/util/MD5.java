@@ -15,17 +15,17 @@ public class MD5 {
 	 * @return
 	 */
 	public static String md5(String str) {
-		return str;
-//		try {
-//			byte[] strTemp = str.getBytes("gb2312");
-//			MessageDigest mdTemp = MessageDigest.getInstance("MD5");
-//			mdTemp.update(strTemp);
-//			byte[] md = mdTemp.digest();
-//			return byte2hex(md);
-//		}
-//		catch (Exception e) {
-//			return null;
-//		}
+//		return str;
+		try {
+			byte[] strTemp = str.getBytes("gb2312");
+			MessageDigest mdTemp = MessageDigest.getInstance("MD5");
+			mdTemp.update(strTemp);
+			byte[] md = mdTemp.digest();
+			return byte2hex(md);
+		}
+		catch (Exception e) {
+			return null;
+		}
 	}
 
 	/**

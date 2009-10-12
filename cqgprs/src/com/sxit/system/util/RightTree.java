@@ -186,13 +186,16 @@ public class RightTree {
 	 * @param rightCode
 	 * @return
 	 */
-	public static List<SysRight> getDirectChildRights(String rightCode) {
+	public static List<SysRight> getDirectChildRights(String rightCode,Set<String> myRights) {
 		List childcodes = node.getDirectChildrenList(rightCode);
 		List<SysRight> rights = new ArrayList<SysRight>();
 		for (int i = 0; i < childcodes.size(); i++) {
+			
 			String menuid = childcodes.get(i).toString();
+			if(myRights==null||(myRights!=null&&myRights.contains(menuid))){
 			SysRight sysMenu = rightMap.get(menuid);
 			rights.add(sysMenu);
+			}
 		}
 	
 		return rights;

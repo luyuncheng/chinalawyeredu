@@ -7,10 +7,10 @@
         <comment>系统角色表</comment>
         <id name="roleid" type="short">
             <column name="ROLEID" precision="5" scale="0" />
-                <generator class="identity" />
-             <!--   <generator class="sequence">
+      <!-- <generator class="identity" />-->
+          <generator class="sequence">
             <param name="sequence">jf_sequence</param>
-            </generator>-->
+            </generator>
         </id>
         <property name="rolename" type="string">
             <column name="ROLENAME" length="50" not-null="true">
