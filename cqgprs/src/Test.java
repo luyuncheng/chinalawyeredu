@@ -15,6 +15,7 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args)throws Exception {
+		System.out.println(com.sxit.common.util.MD5.md5(("123456")));
 		// TODO Auto-generated method stub
 //		java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader(new FileInputStream(new File("c:\\c.txt")),"utf-8"));
 //		String line = null;
